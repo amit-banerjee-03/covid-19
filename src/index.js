@@ -59,13 +59,13 @@ export default class Example extends PureComponent {
     } else {
       var data = [];
       Countries.map(Country => (
-        data.push({ name: Country.Country, "Total Confirmed": Country.TotalConfirmed, "Total Recovered": Country.TotalRecovered, "amt": Country.TotalDeaths })
+        data.push({ name: Country.Country, "Total Confirmed": Country.TotalConfirmed, "Total Recovered": Country.TotalRecovered, "Total Deaths": Country.TotalDeaths })
       ));
       return (
         <center>
           <div style={{
-            fontFamily:"sans-serif",
-            color:"#ba0000"
+            fontFamily: "sans-serif",
+            color: "#ba0000"
           }}>
             <h1>Worldwide COVID-19 cases</h1>
           </div>
@@ -75,7 +75,7 @@ export default class Example extends PureComponent {
             padding: "50px"
           }}>
             <LineChart
-              width={8000}
+              width={12000}
               height={500}
               data={data}
               margin={{
@@ -89,6 +89,7 @@ export default class Example extends PureComponent {
               <Legend />
               <Line type="monotone" dataKey="Total Confirmed" stroke="#8884d8" activeDot={{ r: 8 }} />
               <Line type="monotone" dataKey="Total Recovered" stroke="#82ca9d" />
+              <Line type="monotone" dataKey="Total Deaths" stroke="#ff0000" />
             </LineChart>
           </div>
         </center>
