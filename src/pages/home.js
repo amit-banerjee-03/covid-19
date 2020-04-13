@@ -1,7 +1,5 @@
-import React, { Component, PureComponent } from 'react';
-import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-} from 'recharts';
+import React, { Component } from 'react';
+import DrawPie from '../recharts/pie-chart-with-customized-label';
 
 const formatData = (countries) => {
     var formattedData = [];
@@ -16,14 +14,25 @@ const formatData = (countries) => {
     return formattedData;
 };
 
-class Home extends PureComponent {
-    static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
+const getPieData = (topCountries, total) => {
+    var pieData = [];
+    var totalConfirmed = 0;
+    topCountries.map(country => {
+        pieData.push({ name: country.Country, value: country.TotalConfirmed });
+        totalConfirmed += country.TotalConfirmed;
+    });
+    pieData.push({ name: "Others", value: total - totalConfirmed });
+    return pieData;
+}
+
+class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             error: null,
             isLoaded: false,
-            Countries: []
+            Countries: [],
+            overview: {}
         };
     }
 
@@ -33,9 +42,12 @@ class Home extends PureComponent {
             .then(
                 (result) => {
                     var formattedData = formatData(result.Countries);
+                    var pieData = getPieData(formattedData.slice(0, 4), result.Global.TotalConfirmed);
                     this.setState({
                         isLoaded: true,
-                        Countries: formattedData
+                        Countries: formattedData,
+                        overview: result.Global,
+                        pieData: pieData
                     });
                 },
                 // Note: it's important to handle errors here
@@ -64,7 +76,7 @@ class Home extends PureComponent {
     }
 
     render() {
-        const { error, isLoaded, Countries } = this.state;
+        const { error, isLoaded, Countries, overview, pieData } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -75,37 +87,36 @@ class Home extends PureComponent {
                 data.push({ name: Country.Country, "Total Confirmed": Country.TotalConfirmed, "Total Recovered": Country.TotalRecovered, "Total Deaths": Country.TotalDeaths })
             ));
             return (
-                <center>
-                    <div style={{
-                        fontFamily: "sans-serif",
-                        color: "#ba0000"
-                    }}>
-                        <h1>Worldwide COVID-19 cases</h1>
+                <>
+                    <div className="row">
+                        <div className="col-lg-3 col-md-3 col-sm-12 col-sm-12"></div>
+                        <div className="col-lg-6 col-md-6 col-sm-12 col-sm-12 text-center">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-12">
+                                        <h1 className="p-3">Coronavirus Cases:</h1>
+                                    </div>
+                                    <div className="col-12">
+                                        <h5 className="p-2">Total Confirmed: {overview.TotalConfirmed.toLocaleString('en-IN')}</h5>
+                                    </div>
+                                    <div className="col-12">
+                                        <h5 className="p-2">Total Deaths: {overview.TotalDeaths.toLocaleString('en-IN')}</h5>
+                                    </div>
+                                    <div className="col-12">
+                                        <h5 className="p-2">Total Recovered: {overview.TotalRecovered.toLocaleString('en-IN')}</h5>
+                                    </div>
+                                    <div className="col-12">
+                                        <h4>Countries with most cases of COVID-19</h4>
+                                    </div>
+                                    <div className="col-12">
+                                        <DrawPie data={pieData} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div style={{
-                        width: "60%",
-                        overflow: "scroll",
-                        padding: "50px"
-                    }}>
-                        <LineChart
-                            width={12000}
-                            height={500}
-                            data={data}
-                            margin={{
-                                top: 5, right: 30, left: 20, bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Line type="monotone" dataKey="Total Confirmed" stroke="#8884d8" activeDot={{ r: 8 }}/>
-                            <Line type="monotone" dataKey="Total Recovered" stroke="#82ca9d" />
-                            <Line type="monotone" dataKey="Total Deaths" stroke="#ff0000" />
-                        </LineChart>
-                    </div>
-                </center>
+                </>
             );
         }
     }
