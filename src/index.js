@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import ReactDOM, { render } from 'react-dom';
 import Home from './pages/home';
 import About from './pages/about';
+import NotFound from './pages/not-found';
 import NavBar from './includes/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
 
 
@@ -18,8 +20,11 @@ export default class Covid19 extends Component {
     return (
       <Router>
         <NavBar />
-        <Route path="/" component={Home} exact></Route>
-        <Route path="/about" component={About} exact></Route>
+        <Switch>
+          <Route path="/" component={Home} exact></Route>
+          <Route path="/about" component={About} exact></Route>
+          <Route component={NotFound}></Route>
+        </Switch>
       </Router>
     );
   }
