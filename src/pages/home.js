@@ -3,6 +3,19 @@ import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
+const formatData = (countries) => {
+    var formattedData = [];
+    for (var index = 0; index < countries.length; index++) {
+        if (countries[index].TotalConfirmed > 0) {
+            formattedData.push(countries[index]);
+        }
+    }
+    formattedData.sort(function (a, b) {
+        return b.TotalConfirmed - a.TotalConfirmed;
+    });
+    return formattedData;
+};
+
 class Home extends PureComponent {
     static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
     constructor(props) {
@@ -19,9 +32,10 @@ class Home extends PureComponent {
             .then(res => res.json())
             .then(
                 (result) => {
+                    var formattedData = formatData(result.Countries);
                     this.setState({
                         isLoaded: true,
-                        Countries: result.Countries
+                        Countries: formattedData
                     });
                 },
                 // Note: it's important to handle errors here
@@ -86,7 +100,7 @@ class Home extends PureComponent {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Line type="monotone" dataKey="Total Confirmed" stroke="#8884d8" activeDot={{ r: 8 }} />
+                            <Line type="monotone" dataKey="Total Confirmed" stroke="#8884d8" activeDot={{ r: 8 }}/>
                             <Line type="monotone" dataKey="Total Recovered" stroke="#82ca9d" />
                             <Line type="monotone" dataKey="Total Deaths" stroke="#ff0000" />
                         </LineChart>
