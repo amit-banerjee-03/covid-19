@@ -9,7 +9,7 @@ const NavBar = () => {
                 <Navbar.Brand href="/"><img src={coronaImage} width="50px" height="50px"/> Covid-19 Monitor</Navbar.Brand>
                 <Nav className="mr-auto">
                     {/* <Nav.Link href="/">Home</Nav.Link> */}
-                    <Nav.Link href="/about">About</Nav.Link>
+                    <Nav.Link href="/country">Country-wise</Nav.Link>
                     <Nav.Link href="/help">Help</Nav.Link>
                 </Nav>
             </Navbar>
