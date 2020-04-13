@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM, { render } from 'react-dom';
 import Home from './pages/home';
 import NavBar from './includes/header';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import {
   BrowserRouter as Router,
   Route
