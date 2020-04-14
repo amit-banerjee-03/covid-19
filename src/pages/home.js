@@ -14,7 +14,7 @@ class Home extends Component {
             Countries: [],
             overview: {}
         };
-        this.pieAttributes = { svgHeight: 350, svgWidth: 350, outerClassName: "border border-dark", cx: 175, cy: 150, outerRadius: 120 };
+        this.pieAttributes = { svgHeight: 350, svgWidth: 350, outerClassName: "border border-dark mb-5", cx: 175, cy: 150, outerRadius: 120 };
     }
 
     componentDidMount() {
