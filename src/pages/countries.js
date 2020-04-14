@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from "jquery";
 import ReactDOM from "react-dom";
-import './../styles/CountryStats.css';
+import './../styles/countries.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -44,7 +44,7 @@ class CountryStats extends Component {
        {options}
     </select>
     <Switch>
-          <Route path="/country/:id" children={<Child />} />
+          <Route path="/country/:id" component={Child} />
         </Switch>
     </Router>
         );
