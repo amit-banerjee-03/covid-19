@@ -62,6 +62,7 @@ class WorldwideSpread extends React.Component {
                                 { value: 'Low', type: 'circle', id: '1', color: "#146804" },
                                 { value: 'Medium', type: 'circle', id: '1', color: "#75561c" },
                                 { value: 'High', type: 'circle', id: '1', color: "#ff0000" },
+                                { value: 'N/A', type: 'circle', id: '1', color: "#e7e7e7" }
                             ]}
                         />
                     </div>
