@@ -6,9 +6,11 @@ class NotFound extends Component {
     render() {
         return (
             <div className="justify-content-start alert fade show">
-                <center>
-                    <h1>Uh Oh!! Seems like we have a 404 error...</h1>
-                </center>
+                <div className="row">
+                    <div className="col-12 text-center">
+                        <h1>Uh Oh!! Seems like we have a 404 error...</h1>
+                    </div>
+                </div>
                 <br />
                 <div className="row">
                     <div className="col-4">
