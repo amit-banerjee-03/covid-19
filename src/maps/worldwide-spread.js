@@ -1,5 +1,6 @@
 import React from "react";
 import { VectorMap } from "react-jvectormap";
+import { Legend } from "recharts";
 var slugs;
 
 const handleClick = (e, countryCode) => {
@@ -11,7 +12,7 @@ class WorldwideSpread extends React.Component {
         slugs = countrySlug;
         return (
             <div className="row">
-                <div className="col-12 mt-5">
+                <div className="col-12">
                     <h3>Country wise spread of COVID-19</h3>
                 </div>
                 <div className="col-12 border border-dark">
@@ -53,6 +54,16 @@ class WorldwideSpread extends React.Component {
                                     }
                                 ]
                             }}
+                        />
+                    </div>
+                    <div>
+                        <Legend
+                            payload={[
+                                { value: 'Low', type: 'circle', id: '1', color: "#146804" },
+                                { value: 'Medium', type: 'circle', id: '1', color: "#75561c" },
+                                { value: 'High', type: 'circle', id: '1', color: "#ff0000" },
+                                { value: 'N/A', type: 'circle', id: '1', color: "#e7e7e7" }
+                            ]}
                         />
                     </div>
                 </div>
