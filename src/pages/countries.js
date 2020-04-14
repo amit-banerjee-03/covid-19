@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import CountryStats from "./country";
 import './../styles/countries.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams
-} from "react-router-dom";
 
 export default class CountryList extends Component {
     constructor(props) {
@@ -26,26 +19,26 @@ export default class CountryList extends Component {
       }
       onChange = (e) => {
         //alert(e.target.value);
-        this.props.history.push('/country/'+e.target.value);
+        window.location.href =  '/country/'+e.target.value;
       }
     render() {
         const options=[];
         const countries=this.state.countries;
         if(this.state.isLoaded){
             for(let x in countries){
-            options.push(<option value={countries[x].Slug}>{countries[x].Country}</option>)
+              let selectedValue="";
+              if(typeof this.props.id!='undefined' && this.props.id==countries[x].Slug){
+                selectedValue="selected";
+              }
+            options.push(<option value={countries[x].Slug} selected={selectedValue}>{countries[x].Country}</option>)
             }
         }
         
-        const selectBox=(<Router>
+        const selectBox=(
           <select id="countries" onChange={this.onChange}>
           <option selected disabled>Select a country</option>
        {options}
     </select>
-    <Switch>
-          <Route path="/country/:id" component={CountryStats} />
-        </Switch>
-    </Router>
         );
         
 
