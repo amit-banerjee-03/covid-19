@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DrawPie from '../recharts/pie-chart-with-customized-label';
+import { Legend } from 'recharts';
 
 const formatData = (countries) => {
     var formattedData = [];
@@ -34,6 +35,7 @@ class Home extends Component {
             Countries: [],
             overview: {}
         };
+        this.pieAttributes = { svgHeight: 380, svgWidth: 500, outerClassName: "border border-dark", cx: 250, cy: 180 };
     }
 
     componentDidMount() {
@@ -109,7 +111,7 @@ class Home extends Component {
                                         <h4>Countries with most cases of COVID-19</h4>
                                     </div>
                                     <div className="col-12">
-                                        <DrawPie data={pieData} />
+                                        <DrawPie data={pieData} COLORS={['#ff0052', '#0088FE', '#00C49F', '#FFBB28', '#FF8042']} attributes={this.pieAttributes} />
                                     </div>
                                 </div>
                             </div>
