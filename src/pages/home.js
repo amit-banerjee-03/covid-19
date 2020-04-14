@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import DrawPie from '../recharts/pie-chart-with-customized-label';
+import WorldwideSpread from '../maps/worldwide-spread';
+import { getCode } from 'country-list';
+
+var countrySlug = {};
 
 const formatData = (countries) => {
     var formattedData = [];
@@ -7,6 +11,7 @@ const formatData = (countries) => {
         if (countries[index].TotalConfirmed > 0) {
             formattedData.push(countries[index]);
         }
+        countrySlug[getCode(countries[index].Country)] = countries[index].Slug;
     }
     formattedData.sort(function (a, b) {
         return b.TotalConfirmed - a.TotalConfirmed;
@@ -23,6 +28,15 @@ const getPieData = (topCountries, total) => {
     });
     pieData.push({ name: "Others", value: total - totalConfirmed });
     return pieData;
+}
+
+const getMapData = (countries) => {
+    var mapData = {};
+    countries.forEach(country => {
+        var countryCode = getCode(country.Country);
+        mapData[countryCode] = country.TotalConfirmed;
+    });
+    return mapData;
 }
 
 class Home extends Component {
@@ -87,6 +101,7 @@ class Home extends Component {
             Countries.map(Country => (
                 data.push({ name: Country.Country, "Total Confirmed": Country.TotalConfirmed, "Total Recovered": Country.TotalRecovered, "Total Deaths": Country.TotalDeaths })
             ));
+            const mapData = getMapData(Countries);
             return (
                 <>
                     <div className="row">
@@ -111,6 +126,9 @@ class Home extends Component {
                                     </div>
                                     <div className="col-12">
                                         <DrawPie data={pieData} COLORS={['#ff0052', '#0088FE', '#00C49F', '#FFBB28', '#FF8042']} attributes={this.pieAttributes} />
+                                    </div>
+                                    <div className="col-12">
+                                        <WorldwideSpread mapData={mapData} countrySlug={countrySlug} />
                                     </div>
                                 </div>
                             </div>
