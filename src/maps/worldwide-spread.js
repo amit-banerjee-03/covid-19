@@ -1,5 +1,6 @@
 import React from "react";
 import { VectorMap } from "react-jvectormap";
+import { Legend } from "recharts";
 var slugs;
 
 const handleClick = (e, countryCode) => {
@@ -53,6 +54,15 @@ class WorldwideSpread extends React.Component {
                                     }
                                 ]
                             }}
+                        />
+                    </div>
+                    <div>
+                        <Legend
+                            payload={[
+                                { value: 'Low', type: 'circle', id: '1', color: "#146804" },
+                                { value: 'Medium', type: 'circle', id: '1', color: "#75561c" },
+                                { value: 'High', type: 'circle', id: '1', color: "#ff0000" },
+                            ]}
                         />
                     </div>
                 </div>
