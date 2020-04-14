@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DrawPie from '../recharts/pie-chart-with-customized-label';
 import WorldwideSpread from '../maps/worldwide-spread';
 import { formatData, getPieData, getMapData, sortCountries } from '../utils/homeUtils';
+import Loading  from '../includes/loading';
 
 var countrySlug = {};
 
@@ -25,7 +26,7 @@ class Home extends Component {
                     var formattedData = formatData(result.Countries);
                     countrySlug = formattedData.country_slug;
                     formattedData = formattedData.formatted_data;
-                    var that=this;
+                    var that = this;
                     sortCountries(formattedData, "Confirmed", (sortedConfirmedData) => {
                         sortCountries(formattedData, "Deaths", (sortedDeathData) => {
                             sortCountries(formattedData, "Recovered", (sortedRecoveredData) => {
@@ -75,7 +76,9 @@ class Home extends Component {
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
+            return (<div>
+                <Loading />
+            </div>);
         } else {
             var data = [];
             Countries.map(Country => (
