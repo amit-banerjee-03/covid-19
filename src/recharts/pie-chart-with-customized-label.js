@@ -20,38 +20,43 @@ const renderCustomizedLabel = ({
 
 export default class DrawPie extends PureComponent {
     render() {
-        const { data, COLORS, attributes } = this.props;
+        const { heading, data, COLORS, attributes } = this.props;
         return (
-            <center>
-                <PieChart width={attributes.svgWidth} height={attributes.svgHeight} className={attributes.outerClassName}>
-                    <Pie
-                        data={data}
-                        cx={attributes.cx}
-                        cy={attributes.cy}
-                        labelLine={false}
-                        label={renderCustomizedLabel}
-                        outerRadius={150}
-                        fill="#8884d8"
-                        dataKey="value"
-                    >
-                        {
-                            data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-                        }
-                    </Pie>
-                    <Legend
-                        payload={
-                            data.map(
-                                (item, index) => ({
-                                    id: item.name,
-                                    type: "square",
-                                    value: item.name,
-                                    color: COLORS[index]
-                                })
-                            )
-                        }
-                    />
-                </PieChart>
-            </center>
+            <>
+                <div className={attributes.outerClassName} >
+                    <h4>
+                        {heading}
+                    </h4>
+                    <PieChart width={attributes.svgWidth} height={attributes.svgHeight}>
+                        <Pie
+                            data={data}
+                            cx={attributes.cx}
+                            cy={attributes.cy}
+                            labelLine={false}
+                            label={renderCustomizedLabel}
+                            outerRadius={attributes.outerRadius}
+                            fill="#8884d8"
+                            dataKey="value"
+                        >
+                            {
+                                data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                            }
+                        </Pie>
+                        <Legend
+                            payload={
+                                data.map(
+                                    (item, index) => ({
+                                        id: item.name,
+                                        type: "square",
+                                        value: item.name,
+                                        color: COLORS[index]
+                                    })
+                                )
+                            }
+                            />
+                    </PieChart>
+                </div>
+            </>
         );
     }
 }
