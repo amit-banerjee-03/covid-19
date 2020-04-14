@@ -12,7 +12,7 @@ class NotFound extends Component {
                 <br />
                 <div className="row">
                     <div className="col-4">
-                        <img src={coronaImage} width="100%" />
+                        <img src={coronaImage} width="100%" alt="" />
                     </div>
                     <div className="col-7">
                         <h3>

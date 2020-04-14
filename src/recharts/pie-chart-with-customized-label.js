@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-    PieChart, Pie, Sector, Cell, Legend
+    PieChart, Pie, Cell, Legend
 } from 'recharts';
 
 const RADIAN = Math.PI / 180;

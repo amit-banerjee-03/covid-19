@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import DrawPie from '../recharts/pie-chart-with-customized-label';
-import { Legend } from 'recharts';
 
 const formatData = (countries) => {
     var formattedData = [];
@@ -18,7 +17,7 @@ const formatData = (countries) => {
 const getPieData = (topCountries, total) => {
     var pieData = [];
     var totalConfirmed = 0;
-    topCountries.map(country => {
+    topCountries.forEach(country => {
         pieData.push({ name: country.Country, value: country.TotalConfirmed });
         totalConfirmed += country.TotalConfirmed;
     });
