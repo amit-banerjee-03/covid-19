@@ -12,7 +12,7 @@ class WorldwideSpread extends React.Component {
         slugs = countrySlug;
         return (
             <div className="row">
-                <div className="col-12 mt-5">
+                <div className="col-12">
                     <h3>Country wise spread of COVID-19</h3>
                 </div>
                 <div className="col-12 border border-dark">

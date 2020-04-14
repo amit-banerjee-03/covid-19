@@ -122,13 +122,13 @@ class Home extends Component {
                                         <h5 className="p-2">Total Recovered: {overview.TotalRecovered.toLocaleString('en-IN')}</h5>
                                     </div>
                                     <div className="col-12">
+                                        <WorldwideSpread mapData={mapData} countrySlug={countrySlug} />
+                                    </div>
+                                    <div className="col-12 mt-5">
                                         <h4>Countries with most cases of COVID-19</h4>
                                     </div>
                                     <div className="col-12">
                                         <DrawPie data={pieData} COLORS={['#ff0052', '#0088FE', '#00C49F', '#FFBB28', '#FF8042']} attributes={this.pieAttributes} />
-                                    </div>
-                                    <div className="col-12">
-                                        <WorldwideSpread mapData={mapData} countrySlug={countrySlug} />
                                     </div>
                                 </div>
                             </div>
