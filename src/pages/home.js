@@ -1,43 +1,9 @@
 import React, { Component } from 'react';
 import DrawPie from '../recharts/pie-chart-with-customized-label';
 import WorldwideSpread from '../maps/worldwide-spread';
-import { getCode } from 'country-list';
+import { formatData, getPieData, getMapData, sortCountries } from '../utils/homeUtils';
 
 var countrySlug = {};
-
-const formatData = (countries) => {
-    var formattedData = [];
-    for (var index = 0; index < countries.length; index++) {
-        if (countries[index].TotalConfirmed > 0) {
-            formattedData.push(countries[index]);
-        }
-        countrySlug[getCode(countries[index].Country)] = countries[index].Slug;
-    }
-    formattedData.sort(function (a, b) {
-        return b.TotalConfirmed - a.TotalConfirmed;
-    });
-    return formattedData;
-};
-
-const getPieData = (topCountries, total) => {
-    var pieData = [];
-    var totalConfirmed = 0;
-    topCountries.forEach(country => {
-        pieData.push({ name: country.Country, value: country.TotalConfirmed });
-        totalConfirmed += country.TotalConfirmed;
-    });
-    pieData.push({ name: "Others", value: total - totalConfirmed });
-    return pieData;
-}
-
-const getMapData = (countries) => {
-    var mapData = {};
-    countries.forEach(country => {
-        var countryCode = getCode(country.Country);
-        mapData[countryCode] = country.TotalConfirmed;
-    });
-    return mapData;
-}
 
 class Home extends Component {
     constructor(props) {
@@ -48,7 +14,7 @@ class Home extends Component {
             Countries: [],
             overview: {}
         };
-        this.pieAttributes = { svgHeight: 380, svgWidth: 500, outerClassName: "border border-dark", cx: 250, cy: 180 };
+        this.pieAttributes = { svgHeight: 350, svgWidth: 350, outerClassName: "border border-dark mb-5", cx: 175, cy: 150, outerRadius: 120 };
     }
 
     componentDidMount() {
@@ -57,12 +23,26 @@ class Home extends Component {
             .then(
                 (result) => {
                     var formattedData = formatData(result.Countries);
-                    var pieData = getPieData(formattedData.slice(0, 4), result.Global.TotalConfirmed);
-                    this.setState({
-                        isLoaded: true,
-                        Countries: formattedData,
-                        overview: result.Global,
-                        pieData: pieData
+                    countrySlug = formattedData.country_slug;
+                    formattedData = formattedData.formatted_data;
+                    var that=this;
+                    sortCountries(formattedData, "Confirmed", (sortedConfirmedData) => {
+                        sortCountries(formattedData, "Deaths", (sortedDeathData) => {
+                            sortCountries(formattedData, "Recovered", (sortedRecoveredData) => {
+                                var pieData = {
+                                    confirmed: getPieData(sortedConfirmedData.slice(0, 4), result.Global.TotalConfirmed, "Confirmed"),
+                                    deaths: getPieData(sortedDeathData.slice(0, 4), result.Global.TotalDeaths, "Deaths"),
+                                    recovered: getPieData(sortedRecoveredData.slice(0, 4), result.Global.TotalRecovered, "Recovered")
+                                };
+                                console.log(pieData);
+                                that.setState({
+                                    isLoaded: true,
+                                    Countries: formattedData,
+                                    overview: result.Global,
+                                    pieData: pieData
+                                });
+                            });
+                        });
                     });
                 },
                 // Note: it's important to handle errors here
@@ -104,10 +84,9 @@ class Home extends Component {
             const mapData = getMapData(Countries);
             return (
                 <>
-                    <div className="row">
-                        <div className="col-lg-3 col-md-3 col-sm-12 col-sm-12"></div>
-                        <div className="col-lg-6 col-md-6 col-sm-12 col-sm-12 text-center">
-                            <div className="container">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12 text-center">
                                 <div className="row">
                                     <div className="col-12">
                                         <h1 className="p-3">Coronavirus Cases:</h1>
@@ -124,16 +103,23 @@ class Home extends Component {
                                     <div className="col-12">
                                         <WorldwideSpread mapData={mapData} countrySlug={countrySlug} />
                                     </div>
-                                    <div className="col-12 mt-5">
-                                        <h4>Countries with most cases of COVID-19</h4>
-                                    </div>
-                                    <div className="col-12">
-                                        <DrawPie data={pieData} COLORS={['#ff0052', '#0088FE', '#00C49F', '#FFBB28', '#FF8042']} attributes={this.pieAttributes} />
+                                    <div className="col-12 mt-5 mb-5">
+                                        <div className="row">
+                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                <DrawPie heading="Countries with most cases of COVID-19" data={pieData.confirmed} COLORS={['#ff0052', '#0088FE', '#00C49F', '#FFBB28', '#FF8042']} attributes={this.pieAttributes} />
+                                            </div>
+                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                <DrawPie heading="Countries with most deaths due to COVID-19" data={pieData.deaths} COLORS={['#ff0052', '#0088FE', '#00C49F', '#FFBB28', '#FF8042']} attributes={this.pieAttributes} />
+                                            </div>
+                                            <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                <DrawPie heading="Countries with most recoveries from COVID-19" data={pieData.recovered} COLORS={['#ff0052', '#0088FE', '#00C49F', '#FFBB28', '#FF8042']} attributes={this.pieAttributes} />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </>
             );
