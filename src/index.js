@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM, { render } from 'react-dom';
 import Home from './pages/home';
-import CountryStats, {Child} from './pages/countries';
+import CountryList from './pages/countries';
+import CountryStats from './pages/country';
 import NotFound from './pages/not-found';
 import NavBar from './includes/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,8 +22,8 @@ export default class Covid19 extends Component {
         <NavBar />
         <Switch>
           <Route path="/" component={Home} exact></Route>
-          <Route path="/country" component={CountryStats} exact></Route>
-          <Route path="/country/:id" component={Child} exact></Route>
+          <Route path="/country" component={CountryList} exact></Route>
+          <Route path="/country/:id" component={CountryStats} exact></Route>
           <Route component={NotFound}></Route>
         </Switch>
       </Router>

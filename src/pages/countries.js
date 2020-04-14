@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import $ from "jquery";
-import ReactDOM from "react-dom";
+import CountryStats from "./country";
 import './../styles/countries.css';
 import {
   BrowserRouter as Router,
@@ -9,7 +8,7 @@ import {
   useParams
 } from "react-router-dom";
 
-class CountryStats extends Component {
+export default class CountryList extends Component {
     constructor(props) {
         super(props);
         this.state = { isLoaded: false, countries: [], error: null };
@@ -44,7 +43,7 @@ class CountryStats extends Component {
        {options}
     </select>
     <Switch>
-          <Route path="/country/:id" component={Child} />
+          <Route path="/country/:id" component={CountryStats} />
         </Switch>
     </Router>
         );
@@ -55,17 +54,4 @@ class CountryStats extends Component {
         );
     }
 }
-export function Child() {
-  // We can use the `useParams` hook here to access
-  // the dynamic pieces of the URL.
-  let { id } = useParams();
 
-  return (
-    <div>
-      <h3>ID: {id}</h3>
-    </div>
-  );
-}
-
-
-export default CountryStats;
