@@ -1,12 +1,4 @@
-
- #countries{
-    height:50px;
-    background-color:#343a40;
-    border:2px solid rgba(215,222,228,0.25);
-    color:rgba(215,222,228,0.88)
-} 
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
-
 .select-search {
     width: 300px;
     position: relative;
@@ -80,7 +72,7 @@
     }
 
     .select-search__input:hover {
-        border-color: #2FCC8B;
+        border-color: #343a40;
     }
 
     .select-search__input:not([readonly]):focus {
@@ -137,7 +129,7 @@
     }
 
     .select-search__option.is-selected {
-        background: #2FCC8B;
+        background: #343a40;
         color: #fff;
     }
 
@@ -148,7 +140,7 @@
 
     .select-search__option.is-highlighted.is-selected,
     .select-search__option.is-selected:hover {
-        background: #2eb378;
+        background: #343a40;
         color: #fff;
     }
 
