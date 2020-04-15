@@ -35,7 +35,6 @@ class Home extends Component {
                                     deaths: getPieData(sortedDeathData.slice(0, 4), result.Global.TotalDeaths, "Deaths"),
                                     recovered: getPieData(sortedRecoveredData.slice(0, 4), result.Global.TotalRecovered, "Recovered")
                                 };
-                                console.log(pieData);
                                 that.setState({
                                     isLoaded: true,
                                     Countries: formattedData,
