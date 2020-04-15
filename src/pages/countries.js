@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import './../styles/countries.css';
+import SelectSearch from 'react-select-search';
 
 export default class CountryList extends Component {
     constructor(props) {
         super(props);
-        this.state = { isLoaded: false, countries: [], error: null };
+        let id='';
+        if(typeof this.props.id!='undefined'){
+          id=this.props.id;
+        }
+        this.state = { isLoaded: false, countries: [], error: null, country:id};
       }
       componentDidMount() {
         fetch('https://api.covid19api.com/countries')
@@ -17,10 +22,20 @@ export default class CountryList extends Component {
           })
 
       }
-      onChange = (e) => {
-        //alert(e.target.value);
-        window.location.href =  '/country/'+e.target.value;
-      }
+      disable = () => {
+        this.setState({
+            disabled: !this.state.disabled,
+        });
+    };
+    clear = () => {
+      this.setState({
+          country: ''
+      });
+  };
+      updateCountry = (value) => {
+      this.setState({ country: value });
+      window.location.href =  '/country/'+value;
+    };
     render() {
         const options=[];
         const countries=this.state.countries;
@@ -30,15 +45,27 @@ export default class CountryList extends Component {
               if(typeof this.props.id!='undefined' && this.props.id==countries[x].Slug){
                 selectedValue="selected";
               }
-            options.push(<option value={countries[x].Slug} selected={selectedValue}>{countries[x].Country}</option>)
+            options.push({name:countries[x].Country, value:countries[x].Slug})
             }
         }
-        
+        let selectCountry='';
+        if(typeof this.props.id=='undefined'){
+          selectCountry='Please select a country to continue';
+        }
         const selectBox=(
-          <select id="countries" onChange={this.onChange}>
-          <option selected disabled>Select a country</option>
-       {options}
-    </select>
+          <div>
+          <div>
+          <SelectSearch
+          key="countries"
+          value={this.state.country}
+          options={options}
+          onChange={this.updateCountry}
+          placeholder="Choose country"
+          search
+      />
+      </div>
+      <div style={{color:"red", fontWeight:"bold", fontSize:"20px"}}>{selectCountry}</div>
+      </div>
         );
         
 
