@@ -14,6 +14,8 @@ export default class CountryStats extends Component {
       url_head: 'https://api.covid19api.com/country/',
       isConfirmedLoaded: false,
       confirmed: [],
+      recovered:[],
+      deaths:[],
       error: null,
       isRecoveredLoaded: false,
       isDeathLoaded: false,
@@ -23,16 +25,14 @@ export default class CountryStats extends Component {
     };
   }
   confirm = (result, param) => {
-    console.log(result);
-    this.setState({ isConfirmedLoaded: true, data: result });
+    this.setState({ isConfirmedLoaded: true, confirmed: result });
   }
   recover = (result) => {
-    this.setState({ isRecoveredLoaded: true });
+    this.setState({ isRecoveredLoaded: true,  recovered:result });
     console.log(this.state.error + " " + this.state.status);
   }
   death = (result) => {
-    this.setState({ isDeathLoaded: true });
-    console.log(this.state.error + " " + this.state.status);
+    this.setState({ isDeathLoaded: true , deaths:result});
   }
   componentDidUpdate() {
     const id = this.state.id;
@@ -53,10 +53,14 @@ export default class CountryStats extends Component {
   render() {
     const countryStat = (
       <div>
-        <CountryList id={this.state.id} />
-        <ConfirmedGraph data={this.state.data} isConfirmedLoaded={this.state.isConfirmedLoaded} />
-        <RecoveredGraph data={this.state.data} isRecoveredLoaded={this.state.isRecoveredLoaded} />
-        <DeathGraph data={this.state.data} isDeathLoaded={this.state.isDeathLoaded} />
+        <div style={{float:"left", width:"30%", backgroundColor:"#343a40"}}>
+          <CountryList id={this.state.id} />
+        </div>
+        <div style={{float:"right",  width:"70%"}} >
+        <ConfirmedGraph data={this.state.confirmed} isConfirmedLoaded={this.state.isConfirmedLoaded} />
+        <RecoveredGraph data={this.state.recovered} isRecoveredLoaded={this.state.isRecoveredLoaded} />
+        <DeathGraph data={this.state.deaths} isDeathLoaded={this.state.isDeathLoaded} />
+        </div>
       </div>
     );
     return (

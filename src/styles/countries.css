@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
 .select-search {
-    width: 300px;
+    width: 100%;
     position: relative;
     margin-bottom: 20px;
     font-family: 'Nunito Sans', sans-serif;
@@ -40,7 +40,7 @@
         height: 36px;
         width: 100%;
         padding: 0 16px;
-        background: #fff;
+        background: #b6c6d6;
         border: none;
         box-shadow: 0 .0625rem .125rem rgba(0, 0, 0, 0.15);
         border-radius: 3px;
@@ -80,7 +80,7 @@
     }
 
     .select-search__select {
-        background: #fff;
+        background:  #b6c6d6;
         box-shadow: 0 .0625rem .125rem rgba(0, 0, 0, 0.15);
     }
 
@@ -115,7 +115,7 @@
         height: 36px;
         width: 100%;
         padding: 0 16px;
-        background: #fff;
+        background:  #b6c6d6;
         border: none;
         outline: none;
         font-family: 'Noto Sans', sans-serif;
@@ -135,12 +135,12 @@
 
     .select-search__option.is-highlighted,
     .select-search__option:not(.is-selected):hover {
-        background: rgba(47, 204, 139, 0.1);
+        background: rgba(104, 148, 173, 0.26);
     }
 
     .select-search__option.is-highlighted.is-selected,
     .select-search__option.is-selected:hover {
-        background: #343a40;
+        background: #343a40ce;
         color: #fff;
     }
 
@@ -149,4 +149,29 @@
         text-transform: uppercase;
         background: #eee;
         padding: 8px 16px;
+    }
+    .statValue{
+        font-size:16px;
+        display:inline-block;
+        width:50%;
+        color:rgba(128, 223, 240, 0.788);
+    }
+    .statName{
+        font-size:14px;
+        color:rgba(255,255,255,0.8);
+        padding:2px;
+        display:inline-block;
+        width:50%;
+    }
+    .countryDiv {
+        background-color:rgba(255,255,255,0.5);
+        padding-top:2px;
+        padding-bottom:2px;
+        border:2px solid #343a40ce
+    }
+    .cases {
+        display:inline-block;
+        width:50%;
+        color: #0f151bce;
+        font-weight:bold;
     }

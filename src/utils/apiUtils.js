@@ -5,14 +5,14 @@ export default function callApi(url, componentObj, successCallBack, successParam
             if (successParameter != null && typeof successParameter != "undefined") {
                 successCallBack(result, successParameter);
             } else {
-                successCallBack();
+                successCallBack(result);
             }
             componentObj.setState({ status: 'SUCCESS' });
         },
             (error) => {
-                if (errorParameter != null && typeof errorParameter != "undefined") {
+                if (typeof errorCallBack != "undefined" && errorParameter != null && typeof errorParameter != "undefined") {
                     errorCallBack(errorParameter);
-                } else {
+                } else if(typeof errorCallBack != "undefined"){
                     errorCallBack()
                 }
                 componentObj.setState({ status: 'ERROR', error: error })
