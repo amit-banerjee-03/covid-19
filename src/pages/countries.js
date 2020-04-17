@@ -3,7 +3,9 @@ import './../styles/countries.css';
 import SelectSearch from 'react-select-search';
 import callApi from "../utils/apiUtils"
 import { Link } from 'react-router-dom';
+import covid from '../images/covid.gif'
 
+var exclude=["VI", "TV", "MF", "NC", "BL", "IM", "NU", "PF", "JE", "SH", "GS", "HK", "MS", "KY", "GL"];
 export default class CountryDropdown extends Component {
   constructor(props) {
     super(props);
@@ -41,19 +43,20 @@ export default class CountryDropdown extends Component {
     if (this.state.isLoaded) {
       for (let x in countries) {
         let selectedValue = "";
-        if(countries[x].TotalConfirmed>0){
-        if (typeof this.props.id != 'undefined' && this.props.id == countries[x].Slug) {
+        if(countries[x].TotalConfirmed>0 && !exclude.includes(countries[x].CountryCode)){
+        if (typeof this.props.id != 'undefined' && this.props.id == countries[x].CountryCode) {
           selectedValue = "selected";
         }
-        options.push({ name: countries[x].Country, value: countries[x].Slug })
+        options.push({ name: countries[x].Country, value: countries[x].CountryCode })
       }
     }
     let selectCountry = '';
     if (typeof this.props.id == 'undefined') {
-      selectCountry = 'Please select a country to continue';
+      selectCountry =<div style={{marginTop:"15%"}}><img src={covid} height="200px" width="200px"/>Please select a country to view statistics</div>;
     }
     const selectBox = (
       <div>
+      <div style={{float:"left", width:"30%", backgroundColor:"#343a40"}}>
         <div>
           <SelectSearch
             key="countries"
@@ -64,7 +67,7 @@ export default class CountryDropdown extends Component {
             search
           />
         </div>
-          <div><h1 style={{color:"rgba(255,255,255,.77)"}}>GLOBAL</h1>
+        <div><h1 style={{color:"rgba(255,255,255,.77)"}}>GLOBAL</h1>
         <div class='statName'>Total Confirmed:</div>
         <div class='statName'>New Confirmed:</div>
         <div class='statValue'>{this.state.global.TotalConfirmed}</div>
@@ -79,8 +82,9 @@ export default class CountryDropdown extends Component {
         <div class='statValue'>{this.state.global.NewRecovered}</div>
       </div>
           <CountryListStats countries={this.state.countries}/>
-        <div style={{ color: "red", fontWeight: "bold", fontSize: "20px", float:"right"}}>{selectCountry}</div>
-      </div>
+          </div>
+    <div style={{ color: "#d21c1cc4", fontWeight: "bold", fontSize: "35px", float:"right",  width:"70%"}}>{selectCountry}</div>
+        </div>
     );
     return (
       selectBox
@@ -94,32 +98,32 @@ export default class CountryDropdown extends Component {
 
 //Statlist of coutries
 
-
 class CountryListStats extends Component{
   constructor(props) {
     super(props);
   }
-  // navigate = (slug) => {
-  //   console.log('/country/' + slug);
-  //   //window.location.href='/country/' + slug;
-  // };
+  navigate=(e, slug)=>{
+    e.preventDefault();
+    window.location.href=slug;
+  }
   render() {
     let list=[];
     let countries=this.props.countries;
     for(let index in countries){
-    if(countries[index].TotalConfirmed>0){
-      const slug="/country/"+countries[index].Slug;
-      const country=(<Link to={slug} style={{textDecoration:"none", color:"black"}}><div class="countryDiv">
+    if(countries[index].TotalConfirmed>0 && !exclude.includes(countries[index].CountryCode)){
+      const slug="/country/"+countries[index].CountryCode;
+      const country=(<Link  style={{textDecoration:"none", color:"black"}} onClick={(e) => { this.navigate(e, slug) }}><div class="countryDiv">
         <h5 class='countryName'>{countries[index].Country}
         </h5>
         <div class='cases'>{countries[index].TotalConfirmed} cases</div>
         <div class='cases'>{countries[index].TotalDeaths} deaths</div>
         </div>
-        </Link>);
+        </Link>
+        );
       list.push(country);
     }
     }
-    return(<div style={{marginTop:"10px"}}>
+    return(<div style={{marginTop:"10px", height:"305px", overflowY:"scroll", overflow:"auto"}}>
       {list}
     </div>);
   }
