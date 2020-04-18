@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM, { render } from 'react-dom';
 import Home from './pages/home';
 import CountryDropdown from './pages/countries';
+import NewsUpdates from './pages/news-updates';
 import NotFound from './pages/not-found';
 import NavBar from './includes/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,6 +24,7 @@ export default class Covid19 extends Component {
           <Route path="/" component={Home} exact></Route>
           <Route path="/country" component={CountryDropdown} exact></Route>
           <Route path="/country/:id" component={CountryDropdown} exact></Route>
+          <Route path="/news" component={NewsUpdates} exact></Route>
           <Route component={NotFound}></Route>
         </Switch>
       </Router>
