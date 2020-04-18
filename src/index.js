@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM, { render } from 'react-dom';
 import Home from './pages/home';
 import CountryList from './pages/countries';
-import CountryStats from './pages/country';
+import CountryStats from './pages/country-details';
 import NotFound from './pages/not-found';
 import NavBar from './includes/header';
 import 'bootstrap/dist/css/bootstrap.min.css';

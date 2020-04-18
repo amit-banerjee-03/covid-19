@@ -27,6 +27,7 @@ export default class CountryStats extends Component {
     };
   }
   populate = (data) => {
+    console.log(data);
     let result=data.timelineitems[0];
     let confirmed=[], deaths=[], recovered=[];
     let newCase=0, newDeath=0, currentTotal=0, currentDeath=0, currentRecovered=0;
@@ -93,36 +94,36 @@ class CountryData extends Component{
   render(){
     if(this.props.data.isLoaded){
       return(
-      <div class="countryStat-div">
+      <div className="countryStat-div">
       <h1 style={{color:"#1e1280",fontFamily:"Arial Black"}}>{this.props.data.countryName}</h1>
     <div>
       <div style={{display:"inline-block", width:"50%"}}>
-          <h5 class="countryStatHeader">Total Cases</h5>
-          <h4 class="countryStatData">{this.props.data.currentTotalCase}</h4>
+          <h5 className="countryStatHeader">Total Cases</h5>
+          <h4 className="countryStatData">{this.props.data.currentTotalCase}</h4>
       </div>
       <div style={{display:"inline-block", width:"50%"}}>
-          <h5 class="countryStatHeader">New Cases Today</h5>
-          <h4 class="countryStatData">{this.props.data.newCase}</h4>
-      </div>
-    </div>
-    <div>
-      <div style={{display:"inline-block", width:"50%"}}>
-          <h5 class="countryStatHeader">Total Death</h5>
-          <h4 class="countryStatData">{this.props.data.currentTotalDeath}</h4>
-      </div>
-      <div style={{display:"inline-block", width:"50%"}}>
-          <h5 class="countryStatHeader">New Death Today</h5>
-          <h4 class="countryStatData">{this.props.data.newDeath}</h4>
+          <h5 className="countryStatHeader">New Cases Today</h5>
+          <h4 className="countryStatData">{this.props.data.newCase}</h4>
       </div>
     </div>
     <div>
       <div style={{display:"inline-block", width:"50%"}}>
-          <h5 class="countryStatHeader">Total Recovered</h5>
-          <h4 class="countryStatData">{this.props.data.currentTotalRecovery}</h4>
+          <h5 className="countryStatHeader">Total Death</h5>
+          <h4 className="countryStatData">{this.props.data.currentTotalDeath}</h4>
       </div>
       <div style={{display:"inline-block", width:"50%"}}>
-          <h5 class="countryStatHeader">Death Percentage</h5>
-          <h4 class="countryStatData">{Math.round(parseInt(this.props.data.currentTotalDeath)/parseInt(this.props.data.currentTotalCase)*100)}%</h4>
+          <h5 className="countryStatHeader">New Death Today</h5>
+          <h4 className="countryStatData">{this.props.data.newDeath}</h4>
+      </div>
+    </div>
+    <div>
+      <div style={{display:"inline-block", width:"50%"}}>
+          <h5 className="countryStatHeader">Total Recovered</h5>
+          <h4 className="countryStatData">{this.props.data.currentTotalRecovery}</h4>
+      </div>
+      <div style={{display:"inline-block", width:"50%"}}>
+          <h5 className="countryStatHeader">Death Percentage</h5>
+          <h4 className="countryStatData">{Math.round(parseInt(this.props.data.currentTotalDeath)/parseInt(this.props.data.currentTotalCase)*100)}%</h4>
       </div>
     </div>
     </div>
@@ -140,7 +141,7 @@ class ConfirmedGraph extends Component {
     if (this.props.isLoaded) {
       const countryStat = (
         <div>
-          <h4 class="graphHeader" style={{color:"#363292"}}>Confirmed Cases</h4>
+          <h4 className="graphHeader" style={{color:"#363292"}}>Confirmed Cases</h4>
       <Chart data={this.props.data} x="date" y="case" fillColor="#8884d8"/>
       </div>
       );
@@ -167,7 +168,7 @@ class RecoveredGraph extends Component {
     if (this.props.isLoaded) {
       const countryStat = (
         <div>
-        <h4 class="graphHeader"  style={{color:"#0c7745"}}>Recovered</h4>
+        <h4 className="graphHeader"  style={{color:"#0c7745"}}>Recovered</h4>
  <Chart data={this.props.data} x="date" y="recovered" fillColor="#359c6c"/>
         </div>
       );
@@ -194,7 +195,7 @@ class DeathGraph extends Component {
     if (this.props.isLoaded) {
       const countryStat = (
         <div>
-        <h4 class="graphHeader" style={{color:"#c14642"}}>Death</h4>
+        <h4 className="graphHeader" style={{color:"#c14642"}}>Death</h4>
           <Chart data={this.props.data} x="date" y="death" fillColor="#d88784"/>
         </div>
       );
