@@ -224,13 +224,17 @@ class DeathGraph extends Component {
 class Chart extends Component {
   render() {
     return (
-      <BarChart width={900} height={250} data={this.props.data} style={{ overflowX: "scroll", overflowY: "hidden", overflow: "auto" }}>
-        <CartesianGrid strokeOpacity="0.3" />
-        <XAxis dataKey={this.props.x} />
-        <YAxis />
-        <Tooltip />
-        <Bar dataKey={this.props.y} fill={this.props.fillColor} />
-      </BarChart>
+      <>
+        <center>
+          <BarChart width={600} height={250} data={this.props.data} style={{ overflowX: "scroll", overflowY: "hidden", overflow: "auto" }}>
+            <CartesianGrid strokeOpacity="0.3" />
+            <XAxis dataKey={this.props.x} tick={{ fontSize: 10 }} />
+            <YAxis tick={{ fontSize: 10 }} />
+            <Tooltip wrapperStyle={{ fontSize: 10 }} />
+            <Bar dataKey={this.props.y} fill={this.props.fillColor} />
+          </BarChart>
+        </center>
+      </>
     );
   }
 }
