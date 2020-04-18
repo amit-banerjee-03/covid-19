@@ -108,13 +108,13 @@ class Home extends Component {
                                     <div className="col-12 mt-5 mb-5">
                                         <div className="row">
                                             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                                <DrawPie heading="Countries with most cases of COVID-19" data={pieData.confirmed} COLORS={['#ff0052cf', '#0088FEcf', '#00C49Fcf', '#FFBB28cf', '#FF8042cf']} attributes={this.pieAttributes} />
+                                                <DrawPie heading="Countries with most cases of COVID-19" data={pieData.confirmed} COLORS={['#7e0505af', '#8828a7cf', '#00C49Fcf', '#FFBB28cf', '#FF8042cf']} attributes={this.pieAttributes} />
                                             </div>
                                             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                                <DrawPie heading="Countries with most deaths due to COVID-19" data={pieData.deaths} COLORS={['#ff0052df', '#0088FEdf', '#00C49Fdf', '#FFBB28df', '#FF8042df']} attributes={this.pieAttributes} />
+                                                <DrawPie heading="Countries with most deaths due to COVID-19" data={pieData.deaths} COLORS={['#7e0505af', '#8828a7cf', '#00C49Fcf', '#FFBB28cf', '#FF8042cf']} attributes={this.pieAttributes} />
                                             </div>
                                             <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                                <DrawPie heading="Countries with most recoveries from COVID-19" data={pieData.recovered} COLORS={['#ff0052', '#0088FE', '#00C49F', '#FFBB28', '#FF8042']} attributes={this.pieAttributes} />
+                                                <DrawPie heading="Countries with most recoveries from COVID-19" data={pieData.recovered} COLORS={['#7e0505af', '#8828a7cf', '#00C49Fcf', '#FFBB28cf', '#FF8042cf']} attributes={this.pieAttributes} />
                                             </div>
                                         </div>
                                     </div>
