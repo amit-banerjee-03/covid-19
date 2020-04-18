@@ -70,6 +70,7 @@ export default class CountryStats extends Component {
   }
 
   render() {
+    if(this.state.isLoaded){
     const countryStat = (
       <>
         <div className="row">
@@ -91,6 +92,12 @@ export default class CountryStats extends Component {
     return (
       countryStat
     );
+    }else{
+      return (
+      <div>
+      <Loading />
+    </div>);
+    }
   }
 }
 
@@ -156,14 +163,7 @@ class ConfirmedGraph extends Component {
         countryStat
       );
     } else {
-      const countryStat = (
-        <div>
-          <Loading />
-        </div>
-      );
-      return (
-        countryStat
-      );
+      return "";
     }
   }
 }
@@ -183,14 +183,7 @@ class RecoveredGraph extends Component {
         countryStat
       );
     } else {
-      const countryStat = (
-        <div>
-          <Loading />
-        </div>
-      );
-      return (
-        countryStat
-      );
+      return "";
     }
   }
 }
@@ -210,14 +203,7 @@ class DeathGraph extends Component {
         countryStat
       );
     } else {
-      const countryStat = (
-        <div>
-          <Loading />
-        </div>
-      );
-      return (
-        countryStat
-      );
+      return "";
     }
   }
 }
