@@ -60,8 +60,8 @@ export default class CountryDropdown extends Component {
       const selectBox = (
           <div style={{ width: "98%",overflow:"hide",paddingLeft:"10px" }}>
             <div className="row">
-              <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12" style={{ backgroundColor: "#343a40",height:"88vh" }}>
-                <div className="mt-5">
+              <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12" style={{ backgroundColor: "#343a40",height:"88vh",overflowY:"scroll" }}>
+                <div className="mt-3">
                   <SelectSearch
                     key="countries"
                     value={this.state.country}
