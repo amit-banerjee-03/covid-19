@@ -60,7 +60,7 @@ export default class CountryDropdown extends Component {
       const selectBox = (
           <div style={{ width: "98%",overflow:"hide",paddingLeft:"10px" }}>
             <div className="row">
-              <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12" style={{ backgroundColor: "#343a40",height:"88vh",overflowY:"scroll" }}>
+              <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12" style={{ backgroundColor: "#343a40",height:"88vh",overflowY:"auto" }}>
                 <div className="mt-3">
                   <SelectSearch
                     key="countries"
@@ -129,7 +129,7 @@ class CountryListStats extends Component {
         list.push(country);
       }
     }
-    return (<div style={{ marginTop: "10px", height: "305px", overflowY: "scroll", overflow: "auto" }}>
+    return (<div style={{ marginTop: "10px", height: "305px", overflowY: "auto", overflow: "auto" }}>
       {list}
     </div>);
   }
