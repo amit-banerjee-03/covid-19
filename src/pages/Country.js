@@ -1,66 +1,228 @@
 import React, { Component } from 'react';
 import CountryList from "./countries.js";
-import $ from "jquery";
+import Loading from '../includes/loading';
+import './../styles/countries.css';
 import callApi from "../utils/apiUtils"
 import {
-     Line, XAxis, YAxis, CartesianGrid, Bar,  ComposedChart, Tooltip, Legend
-  } from 'recharts';
-export default class CountryStats extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {id:this.props.match.params.id, 
-                      url_head:'https://api.covid19api.com/dayone/country/',
-                      isConfirmedLoaded: false, 
-                      confirmed: [], 
-                      error: null,
-                      isRecoveredLoaded:false,
-                      isDeathLoaded:false,
-                      status:''
-                    };
+  XAxis, YAxis, CartesianGrid, Bar, BarChart, Tooltip, Legend, RadialBarChart, RadialBar
+} from 'recharts';
+export default class CountryStats extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.match.params.id,
+      url: 'https://api.thevirustracker.com/free-api?countryTimeline=',
+      isLoaded: false,
+      confirmed: [],
+      recovered:[],
+      deaths:[],
+      newCase:0,
+      newDeath:0,
+      countryName:"",
+      currentTotalCase:"",
+      currentTotalRecovery:"",
+      currentTotalDeath:"",
+      error: null,
+      status: ''
+    };
+  }
+  populate = (data) => {
+    let result=data.timelineitems[0];
+    let confirmed=[], deaths=[], recovered=[];
+    let newCase=0, newDeath=0, currentTotal=0, currentDeath=0, currentRecovered=0;
+    for(var x in result){
+      let date=x;
+      if(result[x].total_cases>0){
+        currentTotal=result[x].total_cases;
+        confirmed.push({date:date, case:result[x].total_cases});
       }
-      confirm=(result, param)=>{
-        console.log(result);
-        this.setState({isConfirmedLoaded:true});
-        $("#myDiv").append(" "+param['case']+" cases loaded");
+      if(result[x].total_recoveries>0){
+        currentRecovered=result[x].total_recoveries;
+        recovered.push({date:date, recovered:result[x].total_recoveries});
       }
-      recover=(result, param)=>{
-        this.setState({isRecoveredLoaded:true});
-        $("#myDiv").append(" recovered cases loaded");
-        console.log(this.state.error+" "+this.state.status);
+      if(result[x].total_deaths>0){
+        currentDeath=result[x].total_deaths;
+        deaths.push({date:date, death:result[x].total_deaths});
       }
-      componentDidUpdate() {
-        const id=this.state.id;
-        const recovered_url_tail='/status/confirmed/live';
-        const deaths_url_tail='/status/confirmed/live';
-        if(this.state.status=='SUCCESS' && !this.state.isRecoveredLoaded){
-          callApi(this.state.url_head+id+recovered_url_tail, this, this.recover);
-        }
+      if(result[x].new_daily_cases>0){
+      newCase=result[x].new_daily_cases;
       }
-      componentDidMount() {
-        const id=this.state.id;
-        const confirmed_url_tail='/status/confirmed/live';
-        callApi(this.state.url_head+id+confirmed_url_tail, this, this.confirm, {case:'confirmed'});
-      }
-    render() {
-        const graph=(
-        // <div>
-        // <CountryList id={this.state.id}/>
-        // <ComposedChart width={730} height={250} data={this.state.data}>
-        //     <XAxis dataKey="date" />
-        //     <YAxis />
-        //     <Tooltip />
-        //     <Legend />
-        //     <CartesianGrid stroke="#f5f5f5" />
-        //     <Line type="monotone" dataKey="recovered"  stroke="#8884d8" />
-        //     <Bar dataKey="confirmed" barSize={20} fill="#413ea0" />
-        //     <Line type="monotone" dataKey="deaths" stroke="#ff7300" />
-        //   </ComposedChart>
-        //   </div>
-        <div id="myDiv"></div>
-          );
-        return(
-          graph
-        )
+      if(result[x].new_daily_deaths>0){
+      newDeath=result[x].new_daily_deaths;
       }
     }
+    this.setState({ isLoaded: true,
+      countryName:data.countrytimelinedata[0].info.title,
+      confirmed:confirmed,
+      deaths:deaths,
+      recovered:recovered,
+      newCase:newCase,
+      newDeath:newDeath,
+      currentTotalCase:currentTotal,
+    currentTotalRecovery:currentRecovered,
+  currentTotalDeath:currentDeath
+});
+  }
+  componentDidMount() {
+    const id = this.state.id;
+    callApi(this.state.url+id, this, this.populate);
+  }
 
+  render() {
+    const countryStat = (
+      <div>
+          <CountryList id={this.state.id} />
+        <div style={{float:"right",  width:"70%", maxHeight:"575px",overflowY:"scroll", overflow:"auto"}} >
+        <CountryData data={this.state}/>
+        <ConfirmedGraph data={this.state.confirmed} isLoaded={this.state.isLoaded} />
+        <RecoveredGraph data={this.state.recovered} isLoaded={this.state.isLoaded} />
+        <DeathGraph data={this.state.deaths} isLoaded={this.state.isLoaded} />
+        </div>
+      </div>
+    );
+    return (
+      countryStat
+    );
+  }
+}
+
+class CountryData extends Component{
+  constructor(props){
+    super(props);
+  }
+  render(){
+    if(this.props.data.isLoaded){
+      return(
+      <div class="countryStat-div">
+      <h1 style={{color:"#1e1280",fontFamily:"Arial Black"}}>{this.props.data.countryName}</h1>
+    <div>
+      <div style={{display:"inline-block", width:"50%"}}>
+          <h5 class="countryStatHeader">Total Cases</h5>
+          <h4 class="countryStatData">{this.props.data.currentTotalCase}</h4>
+      </div>
+      <div style={{display:"inline-block", width:"50%"}}>
+          <h5 class="countryStatHeader">New Cases Today</h5>
+          <h4 class="countryStatData">{this.props.data.newCase}</h4>
+      </div>
+    </div>
+    <div>
+      <div style={{display:"inline-block", width:"50%"}}>
+          <h5 class="countryStatHeader">Total Death</h5>
+          <h4 class="countryStatData">{this.props.data.currentTotalDeath}</h4>
+      </div>
+      <div style={{display:"inline-block", width:"50%"}}>
+          <h5 class="countryStatHeader">New Death Today</h5>
+          <h4 class="countryStatData">{this.props.data.newDeath}</h4>
+      </div>
+    </div>
+    <div>
+      <div style={{display:"inline-block", width:"50%"}}>
+          <h5 class="countryStatHeader">Total Recovered</h5>
+          <h4 class="countryStatData">{this.props.data.currentTotalRecovery}</h4>
+      </div>
+      <div style={{display:"inline-block", width:"50%"}}>
+          <h5 class="countryStatHeader">Death Percentage</h5>
+          <h4 class="countryStatData">{Math.round(parseInt(this.props.data.currentTotalDeath)/parseInt(this.props.data.currentTotalCase)*100)}%</h4>
+      </div>
+    </div>
+    </div>
+      );
+    }else{
+      return "";
+    }
+  }
+}
+class ConfirmedGraph extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    if (this.props.isLoaded) {
+      const countryStat = (
+        <div>
+          <h4 class="graphHeader" style={{color:"#363292"}}>Confirmed Cases</h4>
+      <Chart data={this.props.data} x="date" y="case" fillColor="#8884d8"/>
+      </div>
+      );
+      return (
+        countryStat
+      );
+    } else {
+      const countryStat = (
+        <div>
+          <Loading />
+        </div>
+      );
+      return (
+        countryStat
+      );
+    }
+  }
+}
+class RecoveredGraph extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    if (this.props.isLoaded) {
+      const countryStat = (
+        <div>
+        <h4 class="graphHeader"  style={{color:"#0c7745"}}>Recovered</h4>
+ <Chart data={this.props.data} x="date" y="recovered" fillColor="#359c6c"/>
+        </div>
+      );
+      return (
+        countryStat
+      );
+    } else {
+      const countryStat = (
+        <div>
+          <Loading />
+        </div>
+      );
+      return (
+        countryStat
+      );
+    }
+  }
+}
+class DeathGraph extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    if (this.props.isLoaded) {
+      const countryStat = (
+        <div>
+        <h4 class="graphHeader" style={{color:"#c14642"}}>Death</h4>
+          <Chart data={this.props.data} x="date" y="death" fillColor="#d88784"/>
+        </div>
+      );
+      return (
+        countryStat
+      );
+    } else {
+      const countryStat = (
+        <div>
+          <Loading />
+        </div>
+      );
+      return (
+        countryStat
+      );
+    }
+  }
+}
+class Chart extends Component{
+  render(){
+    return(
+      <BarChart width={900} height={250} data={this.props.data} style={{overflowX:"scroll", overflowY:"hidden", overflow:"auto"}}>
+      <CartesianGrid strokeOpacity="0.3" />
+      <XAxis dataKey={this.props.x}/>
+      <YAxis />
+      <Tooltip />
+      <Bar dataKey={this.props.y} fill={this.props.fillColor} />
+    </BarChart>
+    );
+}
+}

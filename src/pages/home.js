@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DrawPie from '../recharts/pie-chart-with-customized-label';
 import WorldwideSpread from '../maps/worldwide-spread';
 import { formatData, getPieData, getMapData, sortCountries } from '../utils/homeUtils';
-import Loading  from '../includes/loading';
+import Loading from '../includes/loading';
 
 var countrySlug = {};
 
