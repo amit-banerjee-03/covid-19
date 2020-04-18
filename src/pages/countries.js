@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './../styles/countries.css';
 import SelectSearch from 'react-select-search';
+import CountryStats from "./country-details.js";
 import callApi from "../utils/apiUtils"
 import { Link } from 'react-router-dom';
 import covid from '../images/covid.gif'
@@ -10,8 +11,8 @@ export default class CountryDropdown extends Component {
   constructor(props) {
     super(props);
     let id = '';
-    if (typeof this.props.id != 'undefined') {
-      id = this.props.id;
+    if (typeof this.props.match.params.id != 'undefined') {
+      id = this.props.match.params.id;
     }
     this.state = { isLoaded: false, countries: [], error: null, country: id, status: "" };
   }
@@ -51,8 +52,10 @@ export default class CountryDropdown extends Component {
         }
       }
       let selectCountry = '';
-      if (typeof this.props.id == 'undefined') {
+      if (typeof this.props.match.params.id == 'undefined') {
         selectCountry = <><center><img src={covid} height="200px" width="200px" /><br/>Please select a country to view statistics</center></>;
+      }else{
+        selectCountry=<CountryStats id={this.props.match.params.id}/>
       }
       const selectBox = (
         <div className="container">

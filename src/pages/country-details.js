@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CountryList from "./countries.js";
 import Loading from '../includes/loading';
 import './../styles/countries.css';
 import callApi from "../utils/apiUtils"
@@ -10,7 +9,7 @@ export default class CountryStats extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.match.params.id,
+      id: this.props.id,
       url: 'https://api.thevirustracker.com/free-api?countryTimeline=',
       isLoaded: false,
       confirmed: [],
@@ -72,8 +71,7 @@ export default class CountryStats extends Component {
   render() {
     const countryStat = (
       <div>
-          <CountryList id={this.state.id} />
-        <div style={{float:"right",  width:"70%", maxHeight:"575px",overflowY:"scroll", overflow:"auto"}} >
+        <div style={{float:"right", maxHeight:"575px",overflowY:"scroll", overflow:"auto"}} >
         <CountryData data={this.state}/>
         <ConfirmedGraph data={this.state.confirmed} isLoaded={this.state.isLoaded} />
         <RecoveredGraph data={this.state.recovered} isLoaded={this.state.isLoaded} />
