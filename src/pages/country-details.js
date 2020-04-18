@@ -74,16 +74,16 @@ export default class CountryStats extends Component {
     const countryStat = (
       <>
         <div className="row">
-          <div className="col-12" style={{ overflowX: "auto" }}>
+          <div className="col-12">
             <CountryData data={this.state} />
           </div>
-          <div className="col-12" style={{ overflowX: "auto" }}>
+          <div className="col-12">
             <ConfirmedGraph data={this.state.confirmed} isLoaded={this.state.isLoaded} />
           </div>
-          <div className="col-12" style={{ overflowX: "auto" }}>
+          <div className="col-12">
             <RecoveredGraph data={this.state.recovered} isLoaded={this.state.isLoaded} />
           </div>
-          <div className="col-12" style={{ overflowX: "auto" }}>
+          <div className="col-12">
             <DeathGraph data={this.state.deaths} isLoaded={this.state.isLoaded} />
           </div>
         </div>
