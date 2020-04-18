@@ -74,16 +74,16 @@ export default class CountryStats extends Component {
     const countryStat = (
       <>
         <div className="row">
-          <div className="col-12" style={{ overflowX: "scroll" }}>
+          <div className="col-12" style={{ overflowX: "auto" }}>
             <CountryData data={this.state} />
           </div>
-          <div className="col-12" style={{ overflowX: "scroll" }}>
+          <div className="col-12" style={{ overflowX: "auto" }}>
             <ConfirmedGraph data={this.state.confirmed} isLoaded={this.state.isLoaded} />
           </div>
-          <div className="col-12" style={{ overflowX: "scroll" }}>
+          <div className="col-12" style={{ overflowX: "auto" }}>
             <RecoveredGraph data={this.state.recovered} isLoaded={this.state.isLoaded} />
           </div>
-          <div className="col-12" style={{ overflowX: "scroll" }}>
+          <div className="col-12" style={{ overflowX: "auto" }}>
             <DeathGraph data={this.state.deaths} isLoaded={this.state.isLoaded} />
           </div>
         </div>
@@ -212,7 +212,7 @@ class Chart extends Component {
     return (
       <>
         <center>
-          <BarChart width={900} height={250} data={this.props.data} style={{ overflowX: "scroll", overflowY: "hidden", overflow: "auto"}}>
+          <BarChart width={900} height={250} data={this.props.data} style={{ overflowX: "auto", overflowY: "hidden", overflow: "auto"}}>
             <CartesianGrid strokeOpacity="0.3" />
             <XAxis dataKey={this.props.x} tick={{ fontSize: 15 }} />
             <YAxis tick={{ fontSize: 15 }} />
