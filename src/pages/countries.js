@@ -58,38 +58,38 @@ export default class CountryDropdown extends Component {
         selectCountry = <CountryStats id={this.props.match.params.id} />
       }
       const selectBox = (
-          <div style={{ width: "98%",overflowY:"auto",overflowX:"hidden" ,paddingLeft:"10px" }}>
-            <div className="row" style={{overflowX:"hide" }}>
-              <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12" style={{ backgroundColor: "#343a40",height:"88vh",overflowY:"auto",overflowX:"hide" }}>
-                <div className="mt-3">
-                  <Select options={options}
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-1" style={{ backgroundColor: "#343a40" }}>
+              <div className="mt-3">
+                <Select options={options}
                   onChange={this.updateCountry}
                   labelField="name"
                   valueField="value"
                   searchBy="name"
                   searchable="true"
                   placeholder="Choose country"
-                  style={{backgroundColor:"#cccce8fc", color:"black"}}/>
-                </div>
-                <div><h1 style={{ color: "rgba(255,255,255,.77)" }}>GLOBAL</h1>
-                  <div className='statName'>Total Confirmed:</div>
-                  <div className='statName'>New Confirmed:</div>
-                  <div className='statValue'>{this.state.global.TotalConfirmed}</div>
-                  <div className='statValue'>{this.state.global.NewConfirmed}</div>
-                  <div className='statName'>Total Deaths:</div>
-                  <div className='statName'>New Deaths:</div>
-                  <div className='statValue'>{this.state.global.TotalDeaths}</div>
-                  <div className='statValue'>{this.state.global.NewDeaths}</div>
-                  <div className='statName'>Total Recovered:</div>
-                  <div className='statName'>New Recovered:</div>
-                  <div className='statValue'>{this.state.global.TotalRecovered}</div>
-                  <div className='statValue'>{this.state.global.NewRecovered}</div>
-                </div>
-                <CountryListStats countries={this.state.countries} />
+                  style={{ backgroundColor: "#cccce8fc", color: "black"}} />
               </div>
-              <div className="col-lg-9 col-md-9 col-sm-12 col-xs-12" style={{ color: "#d21c1cc4", fontWeight: "bold", fontSize: "35px", maxHeight: "88vh", overflowY: "auto"}}>{selectCountry}</div>
+              <div><h1 style={{ color: "rgba(255,255,255,.77)" }}>GLOBAL</h1>
+                <div className='statName'>Total Confirmed:</div>
+                <div className='statName'>New Confirmed:</div>
+                <div className='statValue'>{this.state.global.TotalConfirmed}</div>
+                <div className='statValue'>{this.state.global.NewConfirmed}</div>
+                <div className='statName'>Total Deaths:</div>
+                <div className='statName'>New Deaths:</div>
+                <div className='statValue'>{this.state.global.TotalDeaths}</div>
+                <div className='statValue'>{this.state.global.NewDeaths}</div>
+                <div className='statName'>Total Recovered:</div>
+                <div className='statName'>New Recovered:</div>
+                <div className='statValue'>{this.state.global.TotalRecovered}</div>
+                <div className='statValue'>{this.state.global.NewRecovered}</div>
+              </div>
+              <CountryListStats countries={this.state.countries} />
             </div>
+            <div className="col-lg-9 col-md-9 col-sm-12 col-xs-12" style={{ color: "#d21c1cc4", fontWeight: "bold", fontSize: "35px" }}>{selectCountry}</div>
           </div>
+        </div>
 
       );
       return (
@@ -129,7 +129,7 @@ class CountryListStats extends Component {
         list.push(country);
       }
     }
-    return (<div style={{ marginTop: "10px", height: "305px", overflowY: "auto", overflow: "auto" }}>
+    return (<div style={{ marginTop: "10px", height: "305px", overflowY: "auto" }}>
       {list}
     </div>);
   }

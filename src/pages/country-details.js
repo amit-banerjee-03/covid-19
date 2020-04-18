@@ -25,11 +25,11 @@ export default class CountryStats extends Component {
       status: ''
     };
   }
-  formattedDate=(value)=>{
-      const months={"1":"Jan", "2":"Feb","3":"Mar", "4":"Apr", "5":"May", "6":"Jun", "7":"Jul", "8":"Aug", "9":"Sep", "10":"Oct", "11":"Nov", "12":"Dec"};
-      let parts=value.split("/");
-      return months[parts[0]]+" "+parts[1];
-    }
+  formattedDate = (value) => {
+    const months = { "1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr", "5": "May", "6": "Jun", "7": "Jul", "8": "Aug", "9": "Sep", "10": "Oct", "11": "Nov", "12": "Dec" };
+    let parts = value.split("/");
+    return months[parts[0]] + " " + parts[1];
+  }
   populate = (data) => {
     console.log(data);
     let result = data.timelineitems[0];
@@ -75,33 +75,33 @@ export default class CountryStats extends Component {
   }
 
   render() {
-    if(this.state.isLoaded){
-    const countryStat = (
-      <>
-        <div className="row">
-          <div className="col-12">
-            <CountryData data={this.state} />
+    if (this.state.isLoaded) {
+      const countryStat = (
+        <>
+          <div className="row">
+            <div className="col-12">
+              <CountryData data={this.state} />
+            </div>
+            <div className="col-12" style={{ overflowX: "auto" }}>
+              <ConfirmedGraph data={this.state.confirmed} isLoaded={this.state.isLoaded} />
+            </div>
+            <div className="col-12" style={{ overflowX: "auto" }}>
+              <RecoveredGraph data={this.state.recovered} isLoaded={this.state.isLoaded} />
+            </div>
+            <div className="col-12 mb-3" style={{ overflowX: "auto" }}>
+              <DeathGraph data={this.state.deaths} isLoaded={this.state.isLoaded} />
+            </div>
           </div>
-          <div className="col-12">
-            <ConfirmedGraph data={this.state.confirmed} isLoaded={this.state.isLoaded} />
-          </div>
-          <div className="col-12">
-            <RecoveredGraph data={this.state.recovered} isLoaded={this.state.isLoaded} />
-          </div>
-          <div className="col-12">
-            <DeathGraph data={this.state.deaths} isLoaded={this.state.isLoaded} />
-          </div>
-        </div>
-      </>
-    );
-    return (
-      countryStat
-    );
-    }else{
+        </>
+      );
       return (
-      <div>
-      <Loading />
-    </div>);
+        countryStat
+      );
+    } else {
+      return (
+        <div>
+          <Loading />
+        </div>);
     }
   }
 }
@@ -217,7 +217,7 @@ class Chart extends Component {
     return (
       <>
         <center>
-          <BarChart width={900} height={250} data={this.props.data} style={{ overflowX: "auto", overflowY: "hidden", overflow: "auto"}}>
+          <BarChart width={900} height={250} data={this.props.data}>
             <CartesianGrid strokeOpacity="0.3" />
             <XAxis dataKey={this.props.x} tick={{ fontSize: 15 }} />
             <YAxis tick={{ fontSize: 15 }} />
