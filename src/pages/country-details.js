@@ -83,7 +83,7 @@ export default class CountryStats extends Component {
           <div className="col-12" style={{ overflowX: "scroll" }}>
             <RecoveredGraph data={this.state.recovered} isLoaded={this.state.isLoaded} />
           </div>
-          <div className="class-12" style={{ overflowX: "scroll" }}>
+          <div className="col-12" style={{ overflowX: "scroll" }}>
             <DeathGraph data={this.state.deaths} isLoaded={this.state.isLoaded} />
           </div>
         </div>
@@ -212,11 +212,11 @@ class Chart extends Component {
     return (
       <>
         <center>
-          <BarChart width={600} height={250} data={this.props.data} style={{ overflowX: "scroll", overflowY: "hidden", overflow: "auto" }}>
+          <BarChart width={900} height={250} data={this.props.data} style={{ overflowX: "scroll", overflowY: "hidden", overflow: "auto"}}>
             <CartesianGrid strokeOpacity="0.3" />
-            <XAxis dataKey={this.props.x} tick={{ fontSize: 10 }} />
-            <YAxis tick={{ fontSize: 10 }} />
-            <Tooltip wrapperStyle={{ fontSize: 10 }} />
+            <XAxis dataKey={this.props.x} tick={{ fontSize: 15 }} />
+            <YAxis tick={{ fontSize: 15 }} />
+            <Tooltip wrapperStyle={{ fontSize: 15 }} />
             <Bar dataKey={this.props.y} fill={this.props.fillColor} />
           </BarChart>
         </center>
