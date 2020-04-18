@@ -58,7 +58,7 @@ export default class CountryDropdown extends Component {
         selectCountry = <CountryStats id={this.props.match.params.id} />
       }
       const selectBox = (
-          <div style={{ width: "98%",overflow:"hide",paddingLeft:"10px" }}>
+          <div style={{ width: "98%",overflow:"auto",paddingLeft:"10px" }}>
             <div className="row">
               <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12" style={{ backgroundColor: "#343a40",height:"88vh",overflowY:"auto" }}>
                 <div className="mt-3">
@@ -87,7 +87,7 @@ export default class CountryDropdown extends Component {
                 </div>
                 <CountryListStats countries={this.state.countries} />
               </div>
-              <div className="col-lg-9 col-md-9 col-sm-12 col-xs-12" style={{ color: "#d21c1cc4", fontWeight: "bold", fontSize: "35px", maxHeight: "88vh", overflowY: "scroll" }}>{selectCountry}</div>
+              <div className="col-lg-9 col-md-9 col-sm-12 col-xs-12" style={{ color: "#d21c1cc4", fontWeight: "bold", fontSize: "35px", maxHeight: "88vh", overflowY: "auto" }}>{selectCountry}</div>
             </div>
           </div>
 
