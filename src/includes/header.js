@@ -11,6 +11,7 @@ const NavBar = () => {
                     {/* <Nav.Link href="/">Home</Nav.Link> */}
                     <Nav.Link href="/country">Countries</Nav.Link>
                     <Nav.Link href="/news">News</Nav.Link>
+                    <Nav.Link href="/guidelines">WHO Guidelines</Nav.Link>
                 </Nav>
             </Navbar>
         </>

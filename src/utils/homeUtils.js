@@ -27,7 +27,7 @@ export const formatData = (countries) => {
         if (countries[index].TotalConfirmed > 0) {
             formattedData.push(countries[index]);
         }
-        countrySlug[getCode(countries[index].Country)] = countries[index].Slug;
+        countrySlug[getCode(countries[index].Country)] = countries[index].CountryCode;
     }
     return { formatted_data: formattedData, country_slug: countrySlug };
 };
