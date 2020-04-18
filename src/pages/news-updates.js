@@ -58,13 +58,21 @@ class NewsUpdates extends Component {
                                     </div>
                                     {
                                         articles.map((article, index) => {
-                                            return (
-                                                <>
-                                                    <div className="col-12 mb-3">
-                                                        <Article article={article} />
-                                                    </div>
-                                                </>
-                                            );
+                                            if (article.title.toLowerCase().indexOf("covid") !== -1 || article.title.toLowerCase().indexOf("coronavirus") !== -1 || article.description.toLowerCase().indexOf("covid") !== -1 || article.description.toLowerCase().indexOf("coronavirus") !== -1) {
+                                                return (
+                                                    <>
+                                                        <div className="col-12 mb-3">
+                                                            <Article article={article} />
+                                                        </div>
+                                                    </>
+                                                );
+                                            } else {
+                                                return (
+                                                    <>
+                                                    </>
+                                                );
+                                            }
+
                                         })
                                     };
                                 </div>
