@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './../styles/countries.css';
-import SelectSearch from 'react-select-search';
 import CountryStats from "./country-details.js";
 import callApi from "../utils/apiUtils"
 import { Link } from 'react-router-dom';
 import covid from '../images/covid.gif'
+import Select from "react-dropdown-select";
 
 var exclude = ["VI", "TV", "MF", "NC", "BL", "IM", "NU", "PF", "JE", "SH", "GS", "HK", "MS", "KY", "GL"];
 export default class CountryDropdown extends Component {
@@ -34,8 +34,8 @@ export default class CountryDropdown extends Component {
     });
   };
   updateCountry = (value) => {
-    this.setState({ country: value });
-    window.location.href = '/country/' + value;
+    this.setState({ country: value[0].value });
+    window.location.href = '/country/' + value[0].value;
   };
   render() {
     const options = [];
@@ -62,14 +62,14 @@ export default class CountryDropdown extends Component {
             <div className="row" style={{overflowX:"hide" }}>
               <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12" style={{ backgroundColor: "#343a40",height:"88vh",overflowY:"auto",overflowX:"hide" }}>
                 <div className="mt-3">
-                  <SelectSearch
-                    key="countries"
-                    value={this.state.country}
-                    options={options}
-                    onChange={this.updateCountry}
-                    placeholder="Choose country"
-                    search
-                  />
+                  <Select options={options}
+                  onChange={this.updateCountry}
+                  labelField="name"
+                  valueField="value"
+                  searchBy="name"
+                  searchable="true"
+                  placeholder="Choose country"
+                  style={{backgroundColor:"#cccce8fc", color:"black"}}/>
                 </div>
                 <div><h1 style={{ color: "rgba(255,255,255,.77)" }}>GLOBAL</h1>
                   <div className='statName'>Total Confirmed:</div>

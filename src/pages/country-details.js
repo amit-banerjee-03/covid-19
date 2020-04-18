@@ -25,13 +25,18 @@ export default class CountryStats extends Component {
       status: ''
     };
   }
+  formattedDate=(value)=>{
+      const months={"1":"Jan", "2":"Feb","3":"Mar", "4":"Apr", "5":"May", "6":"Jun", "7":"Jul", "8":"Aug", "9":"Sep", "10":"Oct", "11":"Nov", "12":"Dec"};
+      let parts=value.split("/");
+      return months[parts[0]]+" "+parts[1];
+    }
   populate = (data) => {
     console.log(data);
     let result = data.timelineitems[0];
     let confirmed = [], deaths = [], recovered = [];
     let newCase = 0, newDeath = 0, currentTotal = 0, currentDeath = 0, currentRecovered = 0;
     for (var x in result) {
-      let date = x;
+      let date = this.formattedDate(x);
       if (result[x].total_cases > 0) {
         currentTotal = result[x].total_cases;
         confirmed.push({ date: date, case: result[x].total_cases });
