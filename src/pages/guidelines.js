@@ -64,7 +64,7 @@ class Guidelines extends Component {
                             </ul>
                         </div>
                         <div className="col-12 mt-5">
-                            <h5><b>Source</b><Button variant="link" onClick={() => { window.open("https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public", '_blank'); }}>World Health Ooganization</Button></h5>
+                            <h5><b>Source</b><Button variant="link" onClick={() => { window.open("https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public", '_blank'); }}>World Health Organization</Button></h5>
                         </div>
                     </div>
                 </div>
