@@ -89,26 +89,30 @@ class Home extends Component {
 
                     <div className="container-fluid">
                         <div className="row">
-                            <div className="col-12 text-center">
-                                <div className="col-12">
-                                    <WorldwideSpread mapData={mapData} countrySlug={countrySlug} />
+                            <div className="col-12 mt-2 mb-2 text-center">
+                                <h3>Country wise spread of COVID-19</h3>
+                            </div>
+                            <div className="col-12">
+                                <div className="row mt-2 mb-2">
+                                    <div className="col-lg-4 col-mg-4 col-sm-12 col-xs-12 text-center">
+                                        <h5 className="p-2" style={{ color: "blue", fontWeight: "bold", fontSize: "1.7em" }}>Confirmed: {overview.TotalConfirmed.toLocaleString('en-IN')}</h5>
+                                    </div>
+                                    <div className="col-lg-4 col-mg-4 col-sm-12 col-xs-12 text-center">
+                                        <h5 className="p-2" style={{ color: "red", fontWeight: "bold", fontSize: "1.7em" }}>Deaths: {overview.TotalDeaths.toLocaleString('en-IN')}</h5>
+                                    </div>
+                                    <div className="col-lg-4 col-mg-4 col-sm-12 col-xs-12 text-center">
+                                        <h5 className="p-2" style={{ color: "green", fontWeight: "bold", fontSize: "1.7em" }}>Recovered: {overview.TotalRecovered.toLocaleString('en-IN')}</h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                    <div className="container">
-                        <div className="row mt-5 text-center">
-                            <div className="col-lg-4 col-mg-4 col-sm-12 col-xs-12">
-                                <h5 className="p-2" style={{ color: "blue" ,fontWeight:"bold",fontSize:"1.7em"}}>Confirmed: {overview.TotalConfirmed.toLocaleString('en-IN')}</h5>
-                            </div>
-                            <div className="col-lg-4 col-mg-4 col-sm-12 col-xs-12">
-                                <h5 className="p-2" style={{ color: "red" ,fontWeight:"bold",fontSize:"1.7em"}}>Deaths: {overview.TotalDeaths.toLocaleString('en-IN')}</h5>
-                            </div>
-                            <div className="col-lg-4 col-mg-4 col-sm-12 col-xs-12">
-                                <h5 className="p-2" style={{ color: "green" ,fontWeight:"bold",fontSize:"1.7em"}}>Recovered: {overview.TotalRecovered.toLocaleString('en-IN')}</h5>
+                        <div className="col-12 text-center">
+                            <div className="col-12">
+                                <WorldwideSpread mapData={mapData} countrySlug={countrySlug} />
                             </div>
                         </div>
+                    </div>
+                    <div className="container">
                         <div className="row">
                             <div className="col-12 mt-5 mb-5">
                                 <div className="row">

@@ -18,9 +18,6 @@ class WorldwideSpread extends React.Component {
         return (
             <div className="row">
                 <div className="col-12">
-                    <h3>Country wise spread of COVID-19</h3>
-                </div>
-                <div className="col-12">
                     <div>
                         <VectorMap
                             map={"world_mill"}
@@ -69,8 +66,6 @@ class WorldwideSpread extends React.Component {
                                 { value: 'High', type: 'circle', id: '1', color: "#ff0000" },
                                 { value: 'N/A', type: 'circle', id: '1', color: "#e7e7e7" }
                             ]}
-                            verticalAlign="top"
-                            align="right"
                         />
                     </div>
                 </div>
