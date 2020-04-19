@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import covid from '../images/covid.gif'
 import Select from "react-dropdown-select";
 
-var exclude = ["VI", "TV", "MF", "NC", "BL", "IM", "NU", "PF", "JE", "SH", "GS", "HK", "MS", "KY", "GL"];
+var exclude = ['MV','MT','MU','SC','LI','GD','ST','BB','AG','BH','CV','DM','LC','MC','KN','SM','VC','VA','AD','BM','HM','PR','TO','MQ','NR','PW','AW','KM','IO','WF','PN','MH','KY','IM','NC','MF','VG','VI','CC','FO','RE','KI','JE','SJ','AS','CX','BL','FM','NF','FK','GP','NU','AQ','GI','GL','GU','VU','MO','TJ','TM','PM','AX','SB','TK','AI','CK','PF','KP','GF','MS','UM','TC','HK','TV','GS','MP','SH','AN','WS','TF','GG','LS','YT','BV'];
 export default class CountryDropdown extends Component {
   constructor(props) {
     super(props);
