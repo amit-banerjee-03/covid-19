@@ -4,7 +4,12 @@ import { Legend } from "recharts";
 var slugs;
 
 const handleClick = (e, countryCode) => {
-    window.location.href = "country/" + slugs[countryCode];
+    e.preventDefault();
+    if (slugs[countryCode] !== undefined) {
+        window.location.href = "country/" + slugs[countryCode];
+    } else {
+        alert("Oops! We don't have data about this country yet!!");
+    }
 };
 class WorldwideSpread extends React.Component {
     render() {
