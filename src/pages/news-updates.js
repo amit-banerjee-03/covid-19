@@ -16,7 +16,7 @@ class NewsUpdates extends Component {
     }
 
     componentDidMount() {
-        fetch("http://newsapi.org/v2/top-headlines?country=in&apiKey=3d9383a9ea2b4ff29d98e3f8537ba7e1")
+        fetch("https://newsapi.org/v2/top-headlines?country=in&apiKey=3d9383a9ea2b4ff29d98e3f8537ba7e1")
             .then(res => res.json())
             .then(
                 (result) => {
