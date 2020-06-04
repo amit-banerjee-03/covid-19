@@ -85,9 +85,9 @@ export default class CountryStats extends Component {
             <div className="col-12" style={{ overflowX: "auto" }}>
               <ConfirmedGraph data={this.state.confirmed} isLoaded={this.state.isLoaded} />
             </div>
-            <div className="col-12" style={{ overflowX: "auto" }}>
+            {/* <div className="col-12" style={{ overflowX: "auto" }}>
               <RecoveredGraph data={this.state.recovered} isLoaded={this.state.isLoaded} />
-            </div>
+            </div> */}
             <div className="col-12 mb-3" style={{ overflowX: "auto" }}>
               <DeathGraph data={this.state.deaths} isLoaded={this.state.isLoaded} />
             </div>
@@ -136,14 +136,14 @@ class CountryData extends Component {
             </div>
           </div>
           <div>
-            <div style={{ display: "inline-block", width: "50%" }}>
+            {/* <div style={{ display: "inline-block", width: "50%" }}>
               <h5 className="countryStatHeader">Total Recovered</h5>
               <h4 className="countryStatData">{this.props.data.currentTotalRecovery}</h4>
             </div>
             <div style={{ display: "inline-block", width: "50%" }}>
               <h5 className="countryStatHeader">Death Percentage</h5>
               <h4 className="countryStatData">{Math.round(parseInt(this.props.data.currentTotalDeath) / parseInt(this.props.data.currentTotalCase) * 100)}%</h4>
-            </div>
+            </div> */}
           </div>
         </div>
       );

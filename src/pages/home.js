@@ -53,6 +53,10 @@ class Home extends Component {
                         isLoaded: true,
                         error
                     });
+                    const timer = setTimeout(() => {
+                        console.log('Performing Reload');
+                        window.location.reload();
+                    }, 3000);
                 }
             );
         var scriptsToLoad = [
@@ -73,7 +77,7 @@ class Home extends Component {
     render() {
         const { error, isLoaded, Countries, overview, pieData } = this.state;
         if (error) {
-            return <div>Error: {error.message}</div>;
+            return <div>Error: Data fetching limit exceeded. Performing reload in a few moments. Please wait...</div>;
         } else if (!isLoaded) {
             return (<div>
                 <Loading />
